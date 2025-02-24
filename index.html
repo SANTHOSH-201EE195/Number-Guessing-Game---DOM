@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            text-align: center;
+            margin: 50px;
+            color: white;
+        }
+        
+        .holder {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 18px;
+            margin: 10px 0;
+            border: 2px solid white;
+            border-radius: 8px;
+            text-align: center;
+            width: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            color: #333;
+            font-weight: bold;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff7e5f;
+            background: white;
+        }
+
+        button {
+            background: #ff5733;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: #c70039;
+            transform: scale(1.05);
+        }
+
+        #Content {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="holder">
+        <h1>🎯 Number Guessing Game 🎯</h1>
+        <p>Guess a number between <b>1 and 20</b></p>
+        <input type="number" id="value" min="1" max="20">
+        <br>
+        <button onclick="getOutcome()">Guess</button>
+        <p id="Content"></p>
+    </div>
+
+    <script>
+        let Value = Math.floor(1 + Math.random() * 20);
+        let attempts = 0;
+
+        function getOutcome() {
+            let guessedValue = parseInt(document.getElementById("value").value);
+            let p = document.getElementById("Content");
+
+            if (isNaN(guessedValue) || guessedValue < 1 || guessedValue > 20) {
+                p.innerText = "⚠️ Enter a number between 1 and 20!";
+                p.style.color = "yellow";
+                return;
+            }
+
+            attempts++;
+
+            if (guessedValue === Value) {
+                p.innerText = `🎉 Congrats! You got it in ${attempts} attempts! 🎉`;
+                p.style.color = "#4CAF50";
+                
+            } else if (guessedValue < Value) {
+                p.innerText = "📈 Too low! Try a higher number.";
+                p.style.color = "#FFDD57";
+            } else {
+                p.innerText = "📉 Too high! Try a lower number.";
+                p.style.color = "#FF5733";
+            }
+        }
+    </script>
+</body>
+</html>
