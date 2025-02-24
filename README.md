@@ -1,1 +1,1 @@
-# Number-Guessing-Game---DOM
+# Number-Guessing-Game-DOM
